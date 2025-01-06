@@ -17,17 +17,18 @@
             inputs:
               command: 'build'
               projects: 'src/Presentation/Nop.Web/Nop.Web.csproj'
+              publishTestResults: true
           - task: DotNetCoreCLI@2
-            displayName: Run Tests
+            displayName: Run uni Tests
             inputs:
               command: 'test'
               projects: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
-              arguments: '--configuration Release'
+              arguments: '--configuration Release --no-build --logger trx;LogFileName=TestResults.trx' 
           - task: DotNetCoreCLI@2
             displayName: publish the code
             inputs:
               command: 'publish'
-              projects: 'src/Tests/Nop.Tests/Nop.Tests.csproj'
+              projects: 'src/Presentation/Nop.Web/Nop.Web.csproj'
               publishWebProjects: true
               arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
               zipAfterPublish: true
