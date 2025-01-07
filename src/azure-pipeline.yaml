@@ -7,6 +7,11 @@
        - job: jobbuild
          steps:
           - template: template/dot.net.yaml
+            parameter: 
+              - name: template of dot.net
+                dispalyName: dot.net pipeline
+                type: string
+                buildConfiguration: 'package'
               
   
   
