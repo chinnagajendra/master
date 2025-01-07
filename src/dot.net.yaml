@@ -1,6 +1,15 @@
 ---
   pool: default
   trigger: none
+  parameters:
+    - name: command
+      displayName: command
+      default: build
+      type: string
+      values: 
+        - build
+        - test
+        - package
   stages:
     - stage: build
       jobs:
@@ -15,7 +24,7 @@
           - task: DotNetCoreCLI@2
             displayName: build the code 
             inputs:
-              command: 'build'
+              command: ${{parameters.command}}
               projects: 'src/Presentation/Nop.Web/Nop.Web.csproj'
               publishTestResults: true
           - task: DotNetCoreCLI@2
